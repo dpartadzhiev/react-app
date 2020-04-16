@@ -12,6 +12,7 @@ import { editTask } from "../../helpers/editTask";
 
 const AddTask = (props) => {
   const endpoint = props.match.params.endpoint;
+  const editMode = props.match.params.mode;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +20,7 @@ const AddTask = (props) => {
   const [status, setStatus] = useState("");
   const [mode, setMode] = useState("add");
   const [message, setMessage] = useState("");
-  
+
   const onTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -40,15 +41,29 @@ const AddTask = (props) => {
     if (endpoint) {
       setMode("edit");
 
-      const user = JSON.parse(window.localStorage.getItem("loggedUser"));
-      user.tasks.forEach((task) => {
-        if (task.id === endpoint) {
-          setTitle(task.title);
-          setDescription(task.description);
-          setTime(task.time);
-          setStatus(task.status);
-        }
-      });
+      if (editMode !== "admin") {
+        const user = JSON.parse(window.localStorage.getItem("loggedUser"));
+        user.tasks.forEach((task) => {
+          if (task.id === endpoint) {
+            setTitle(task.title);
+            setDescription(task.description);
+            setTime(task.time);
+            setStatus(task.status);
+          }
+        });
+      } else {
+        const users = JSON.parse(window.localStorage.getItem("users"));
+        users.forEach((user) => {
+          user.tasks.forEach((task) => {
+            if (task.id === endpoint) {
+              setTitle(task.title);
+              setDescription(task.description);
+              setTime(task.time);
+              setStatus(task.status);
+            }
+          });
+        });
+      }
     }
   }, []);
 
@@ -63,7 +78,7 @@ const AddTask = (props) => {
     }
 
     if (mode === "edit") {
-      editTask({ id: endpoint, title, description, time, status });
+      editTask(editMode, { id: endpoint, title, description, time, status });
       setMessage("The task was successfully edited!");
     }
   };

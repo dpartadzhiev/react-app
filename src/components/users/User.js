@@ -7,7 +7,9 @@ const User = ({ user, makeAdmin, onUserDelete }) => {
     <tr>
       <td>{user.username}</td>
       <td>{user.role}</td>
-      <td>View tasks</td>
+      <td>
+        <Link to={`/tasks/${user.id}`}>View tasks</Link>
+      </td>
       <td>
         <Link to={`/users/edit/${user.id}`}>
           <Button>Edit</Button>

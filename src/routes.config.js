@@ -1,58 +1,69 @@
-import Login from './components/login/Login';
-import Signup from './components/signup/Signup';
+import Login from "./components/login/Login";
+import Signup from "./components/signup/Signup";
 
-import Home from './components/home/Home'
-import Users from './components/users/Users';
-import Tasks from './components/tasks/AllTasks';
-import TaskForm from './components/tasks/TaskForm';
-import UserForm from './components/users/UserForm';
+import Home from "./components/home/Home";
+import Users from "./components/users/Users";
+import Tasks from "./components/tasks/AllTasks";
+import TaskForm from "./components/tasks/TaskForm";
+import UserForm from "./components/users/UserForm";
+import UserTasks from "./components/tasks/UserTasks";
 
 const routes = [
   {
     title: "Log in",
     path: "/",
-    component: Login
+    component: Login,
   },
   {
     title: "Sign up",
     path: "/signup",
-    component: Signup
+    component: Signup,
   },
   {
     title: "Home",
     path: "/home",
-    component: Home
+    component: Home,
   },
   {
     title: "Tasks",
     path: "/tasks",
-    component: Tasks
+    component: Tasks,
   },
   {
     title: "View Users",
     path: "/users",
-    component: Users
+    component: Users,
   },
   {
     title: "Task Form",
     path: "/tasks/add",
-    component: TaskForm
+    component: TaskForm,
   },
   {
     title: "Edit Task Form",
     path: "/tasks/edit/:endpoint",
-    component: TaskForm
+    component: TaskForm,
+  },
+  {
+    title: "Edit Task Form",
+    path: "/tasks/edit/:endpoint/mode/:mode",
+    component: TaskForm,
   },
   {
     title: "Add User Form",
     path: "/users/add",
-    component: UserForm
+    component: UserForm,
   },
   {
     title: "Edit User Form",
     path: "/users/edit/:endpoint",
-    component: UserForm
-  }
+    component: UserForm,
+  },
+  {
+    title: "Edit User Form",
+    path: "/tasks/:endpoint",
+    component: UserTasks,
+  },
 ];
 
 export default routes;
